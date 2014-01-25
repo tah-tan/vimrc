@@ -21,6 +21,11 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler.vim'
 
 NeoBundle 'tpope/vim-markdown'		" for markdown syntax highlight
+NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'tyru/open-browser.vim'	" for markdown preview
+NeoBundle 'kannokanno/previm'		" markdown preview
+
 
 filetype plugin indent on
 
@@ -42,7 +47,36 @@ set showmatch		" カッコの対応付けを見えるようにする
 set laststatus=2	" 常にステータスラインを表示
 set ruler			" カーソルが何行目の何列に置かれているかを表示する
 set cursorline
+set clipboard*=unnamed	" OSのクリップボードを使用する
+
 
 " vimfilerの設定
 let g:vimfiler_safe_mode_by_default=0		" vimfilerからファイルの新規作成も出来るようにする
+
+" neocompleteの設定
+let g:acp_enableAtStartup=0			"Disable AutoComplPop.
+let g:neocomplete#enable_at_startup=1
+let g:neocomplete#enable_smart_case=1	" Use smartcase
+let g:neocomplete#sources#syntax#min_keyword_length=3	" Set minimum syntax keyword length
+let g:neocomplete#lock_buffer_name_pattern='\*ku\*'
+" define dictionary
+let g:neocomplete#sources#dictionary#dictionaries = {
+			\ 'default' : r',
+			\ 'vimshell' : $HOME.'/.vimshell_hist',
+			\ 'scheme' : $HOME.'/.gosh_completions'
+			\ }
+" define keyword
+if !exists('g:neocomplete#keyword_patterns')
+	let g:neocomplete#keyword_patterns = {}
+endif
+
+" previm用の設定
+" if has('macunix')
+" let g:previm_open_cmd='open -a Safari'
+" elseif has('win64')
+"	let g:previm_open_cmd = 'open -a Firefox'
+" endif
+
+
+
 
